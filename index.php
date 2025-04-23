@@ -97,8 +97,10 @@ function mostrarPokemones($datos){
         }
     </style>
 </head>
-<body class="d-flex justify-content-center vh-100">
+<body class="d-flex align-items-center flex-column vh-100">
 
+
+<h1 class="my-2">¡Tenemos que atraparlos a todos!</h1>
 <main class="container">
         <section class="row row-cols-1 row-cols-md-3 row-cols-lg-5">
             <?php mostrarPokemones($datos); ?>
