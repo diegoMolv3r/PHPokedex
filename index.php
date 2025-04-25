@@ -49,7 +49,16 @@ function mostrarPokemones($datos){
     <title>PHPokedex!</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <link href="imagenes/Pokeball.png" rel="website icon" type="png">
+    <script defer type="module" src="main.js"></script>
     <style>
+        body{
+            --color: #E1E1E1;
+            background-color: #F3F3F3;
+            background-image: linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%,transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%,transparent),
+            linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%,transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%,transparent);
+            background-size: 55px 55px;
+        }
+
         .carta{
             display: flex;
             flex-direction: column;
@@ -59,11 +68,16 @@ function mostrarPokemones($datos){
             justify-content: center;
             align-content: center;
             border-radius: 1rem;
-            background: rgba(255, 255, 255, 0.1); /* Fondo semi-transparente */
-            backdrop-filter: blur(10px); /* Aplica el desenfoque */
-            -webkit-backdrop-filter: blur(10px); /* Compatibilidad con Safari */
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: .5s;
+            cursor: url("./imagenes/pokebola-abierta.png"), auto;
+        }
+
+        .carta:hover{
+            transform: scale(1.2);
         }
 
         .imagen-nombre{
@@ -100,11 +114,16 @@ function mostrarPokemones($datos){
 <body class="d-flex align-items-center flex-column vh-100">
 
 
-<h1 class="my-2">¡Tenemos que atraparlos a todos!</h1>
+<h1 class="h1 my-2 text-center">¡Tenemos que atraparlos a todos!</h1>
 <main class="container">
-        <section class="row row-cols-1 row-cols-md-3 row-cols-lg-5">
+        <section class="row justify-content-center row-cols-1 row-cols-md-3 row-cols-lg-5">
             <?php mostrarPokemones($datos); ?>
         </section>
+
+
+        <audio autoplay loop id="musica-menu">
+                <source src="./imagenes/Pokemon Ruby_Sapphire_Emerald- Littleroot Town.mp3">
+        </audio>
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
