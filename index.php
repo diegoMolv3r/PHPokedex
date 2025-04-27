@@ -1,47 +1,33 @@
 <?php
+require_once("./Database.php"); $database = new Database();
 
-global $database;
-require_once("./conexion.php");
-$datos = $database->query("SELECT * FROM pokemones");
+function mostrarPokemones($array){
+    foreach ($array as $pokemon){
+        $nombre = $pokemon['nombre'];
+        $tipo1 = $pokemon['tipo1'];
+        $tipo2 = $pokemon['tipo2'];
+        $rutaImagen = $pokemon['imagen'];
 
-function mostrarPokemones($datos){
-    while($fila = mysqli_fetch_array($datos)){
-        $id_pokemon = $fila['id'];
-        $nombre = $fila['nombre'];
-        if($id_pokemon <= 9){
-            $id_pokemon = 0 . $id_pokemon;
-        }
-
-        $tipo1 = $fila["tipo1"];
-        $tipo2 = $fila["tipo2"];
-
-        if($fila["tipo2"] != NULL){
-            echo "<div class='carta'>" .
-                    "<div class='imagen-nombre'>".
-                        "<img src='./imagenes/Pokemones/$id_pokemon.png' alt='$nombre'>" .
-                        "<h5> " . $fila['nombre'] . "</h5>" .
-                    "</div>" .
-                    "<div class='tipos2'>".
-                        "<img alt='Foto de $nombre' src='imagenes/Tipos/Tipo_".$tipo1."_EP.png'>".
-                        "<img alt='Foto de $nombre' src='imagenes/Tipos/Tipo_".$tipo2."_EP.png'>".
-                    "</div>" .
-                "</div>";
+        echo "<div class='carta'>";
+        echo    "<div class='imagen-nombre'>";
+        echo        "<img src='$rutaImagen' alt='$nombre'>";
+        echo        "<h5> " . $nombre . "</h5>";
+        echo    "</div>";
+        if($tipo2 == NULL){
+            echo    "<div class='tipos1'>";
+            echo         "<img alt='Foto de $nombre' src='imagenes/Tipos/Tipo_".$tipo1."_EP.png'>";
         }else{
-            echo "<div class='carta'>" .
-                    "<div class='imagen-nombre'>".
-                        "<img src='./imagenes/Pokemones/$id_pokemon.png' alt='$nombre'>" .
-                        "<h5> " . $fila['nombre'] . "</h5>" .
-                    "</div>" .
-                    "<div class='tipos1'>".
-                        "<img alt='Foto de $nombre' src='imagenes/Tipos/Tipo_".$tipo1."_EP.png'>".
-                    "</div>" .
-                "</div>";
+            echo    "<div class='tipos2'>";
+            echo         "<img alt='Foto de $nombre' src='imagenes/Tipos/Tipo_".$tipo1."_EP.png'>";
+            echo         "<img alt='Foto de $nombre' src='imagenes/Tipos/Tipo_".$tipo2."_EP.png'>";
         }
+        echo    "</div>";
+        echo "</div>";
     }
 }
 ?>
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8">
@@ -113,13 +99,26 @@ function mostrarPokemones($datos){
 </head>
 <body class="d-flex align-items-center flex-column vh-100">
 
-
 <h1 class="h1 my-2 text-center">¡Tenemos que atraparlos a todos!</h1>
 <main class="container">
-        <section class="row justify-content-center row-cols-1 row-cols-md-3 row-cols-lg-5">
-            <?php mostrarPokemones($datos); ?>
-        </section>
+        <form class="d-flex" role="search" method="post" action="index.php">
+            <input class="form-control me-2" name="filtro" type="search" placeholder="Ingrese el codigo, nombre o tipo de un pokemon" aria-label="Search">
+            <input class="btn btn-success" type="submit" value="Search">
+        </form>
 
+        <?php
+        $filtro = isset($_POST["filtro"]) ? $_POST["filtro"] : "";
+
+        $pokemonesFiltrados = $database->CONVERTIR_QUERY_PARA_RECORRER("SELECT * FROM pokemones WHERE numero_identificador = '".$filtro."' OR nombre LIKE '%".$filtro."%' OR tipo1 LIKE '%".$filtro."%' OR tipo2 LIKE '%".$filtro."%'");
+        $todosLosPokemones = $database->CONVERTIR_QUERY_PARA_RECORRER("SELECT * FROM pokemones");
+
+        if($_POST["filtro"] != "" && empty($pokemonesFiltrados))
+            echo "<h3>Pokemon no encontrado :(</h3>";
+        ?>
+
+        <section class="row justify-content-center row-cols-1 row-cols-md-3 row-cols-lg-5">
+            <?php ($filtro == "" || empty($pokemonesFiltrados)) ? mostrarPokemones($todosLosPokemones) : mostrarPokemones($pokemonesFiltrados);?>
+        </section>
 
         <audio autoplay loop id="musica-menu">
                 <source src="./imagenes/Pokemon Ruby_Sapphire_Emerald- Littleroot Town.mp3">
@@ -129,5 +128,3 @@ function mostrarPokemones($datos){
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 </body>
 </html>
-
-

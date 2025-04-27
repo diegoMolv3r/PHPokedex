@@ -1,6 +1,6 @@
-<?php ?>
+<?php require_once("./Database.php"); $database = new Database(); ?>
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8">
@@ -26,16 +26,13 @@
 </head>
 
 <body class="container">
-
-        <form class="form p-4 rounded shadow-sm bg-white d-flex flex-column align-items-center" method="post" action="./index.php">
-            <h3 class="title text-center mb-4">Iniciar Sesion</h3>
-
-            <input class="form-control mb-3" name="usuario" placeholder="Nombre de usuario" type="text">
-            <input class="form-control mb-3" name="password" placeholder="Contraseña" type="password">
-            <p class="text-center small">No tenes cuenta? <a href="registrarse.php">Registrarse</a></p>
-            <input class="btn btn-primary button-confirm" type="submit" value="Iniciar Sesion">
-        </form>
-
+    <form class="form p-4 rounded shadow-sm bg-white d-flex flex-column align-items-center" method="post" action="./index.php">
+        <h3 class="title text-center mb-4">Iniciar Sesion</h3>
+        <input class="form-control mb-3" name="usuario" placeholder="Nombre de usuario" type="text">
+        <input class="form-control mb-3" name="password" placeholder="Contraseña" type="password">
+        <p class="text-center small">No tenes cuenta? <a href="registrarse.php">Registrarse</a></p>
+        <input class="btn btn-primary button-confirm" type="submit" value="Iniciar Sesion">
+    </form>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 </body>
 </html>

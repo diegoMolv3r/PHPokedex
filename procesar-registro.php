@@ -1,25 +1,10 @@
 <?php
+require_once("./Database.php"); $database = new Database();
+require_once("Validador.php"); $validador = new Validador();
 
-global $database; require_once("./conexion.php");
-
-$username = $_POST["usuario"];
-$pass = $_POST["password"];
-$confirmarPass = $_POST["confirmarPassword"];
-
-
-function validarPassword($password1, $password2) {
-    return $password1 == $password2;
+if($validador->ValidarUsuario($_POST["usuario"], $_POST["password"], $_POST["confirmarPassword"])){
+    $database->REGISTRAR_USUARIO_EN_LA_BD($_POST["usuario"], $_POST["password"]);
+    echo "Usuario registrado";
+} else {
+    echo $validador->ValidarUsuario($_POST["usuario"], $_POST["password"], $_POST["confirmarPassword"]);
 }
-
-
-
-function agregarUsuario($db, $usuario, $contrasenia, $contraseniaAconfirmar) {
-    if(validarPassword($contrasenia, $contraseniaAconfirmar  )){
-        $db->query("INSERT INTO usuarios (usuario, password) VALUES ('$usuario', '$contrasenia')");
-        return "Usuario registrado";
-    }else{
-        return "Las contrasenias no son iguales";
-    }
-}
-
-echo agregarUsuario($database, $username, $pass, $confirmarPass);
