@@ -7,21 +7,28 @@ function mostrarPokemones($array){
         $tipo1 = $pokemon['tipo1'];
         $tipo2 = $pokemon['tipo2'];
         $rutaImagen = $pokemon['imagen'];
+        $id = $pokemon['numero_identificador'];
 
-        echo "<div class='carta'>";
+        echo "<div class='carta p-2'  style=' height: auto; width: auto'>";
         echo    "<div class='imagen-nombre'>";
         echo        "<img src='$rutaImagen' alt='$nombre'>";
         echo        "<h5> " . $nombre . "</h5>";
         echo    "</div>";
         if($tipo2 == NULL){
-            echo    "<div class='tipos1'>";
+            echo    "<div class='tipos'>";
             echo         "<img alt='Foto de $nombre' src='imagenes/Tipos/Tipo_".$tipo1."_EP.png'>";
         }else{
-            echo    "<div class='tipos2'>";
+            echo    "<div class='tipos'>";
             echo         "<img alt='Foto de $nombre' src='imagenes/Tipos/Tipo_".$tipo1."_EP.png'>";
             echo         "<img alt='Foto de $nombre' src='imagenes/Tipos/Tipo_".$tipo2."_EP.png'>";
         }
-        echo    "</div>";
+            echo    "</div>";
+
+            echo    "<div>";
+            echo        "<a href='vista-pokemon.php?id=$id' class='link-info mt-3'>VER</a>";
+            echo        "<a href='#' class='link-info mt-3 mx-1'>MODIFICAR</a>";
+            echo        "<a href='#' class='link-info mt-3'>BORRAR</a>";
+            echo    "</div>";
         echo "</div>";
     }
 }
@@ -35,7 +42,6 @@ function mostrarPokemones($array){
     <title>PHPokedex!</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <link href="imagenes/Pokeball.png" rel="website icon" type="png">
-    <script defer type="module" src="main.js"></script>
     <style>
         body{
             --color: #E1E1E1;
@@ -62,10 +68,6 @@ function mostrarPokemones($array){
             cursor: url("./imagenes/pokebola-abierta.png"), auto;
         }
 
-        .carta:hover{
-            transform: scale(1.2);
-        }
-
         .imagen-nombre{
             height: 48px;
             width: 100%;
@@ -82,19 +84,20 @@ function mostrarPokemones($array){
             color: black;
         }
 
-        .tipos1{
+        .tipos{
             width: 100%;
             display: flex;
             justify-content: start;
-
         }
 
-        .tipos2{
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-
+        .btn{
+            transition: .8s;
         }
+
+        .btn:hover{
+            transform: scale(1.2);
+        }
+
     </style>
 </head>
 <body class="d-flex align-items-center flex-column vh-100">
@@ -103,7 +106,7 @@ function mostrarPokemones($array){
 <main class="container">
         <form class="d-flex" role="search" method="post" action="index.php">
             <input class="form-control me-2" name="filtro" type="search" placeholder="Ingrese el codigo, nombre o tipo de un pokemon" aria-label="Search">
-            <input class="btn btn-success" type="submit" value="Search">
+            <input class="btn btn-success" type="submit" value="Buscar">
         </form>
 
         <?php
@@ -112,8 +115,11 @@ function mostrarPokemones($array){
         $pokemonesFiltrados = $database->CONVERTIR_QUERY_PARA_RECORRER("SELECT * FROM pokemones WHERE numero_identificador = '".$filtro."' OR nombre LIKE '%".$filtro."%' OR tipo1 LIKE '%".$filtro."%' OR tipo2 LIKE '%".$filtro."%'");
         $todosLosPokemones = $database->CONVERTIR_QUERY_PARA_RECORRER("SELECT * FROM pokemones");
 
-        if($_POST["filtro"] != "" && empty($pokemonesFiltrados))
-            echo "<h3>Pokemon no encontrado :(</h3>";
+        if(isset($_POST["filtro"])){
+            if($_POST["filtro"] != "" && empty($pokemonesFiltrados))
+                echo "<h3>Pokemon no encontrado :(</h3>";
+        }
+
         ?>
 
         <section class="row justify-content-center row-cols-1 row-cols-md-3 row-cols-lg-5">

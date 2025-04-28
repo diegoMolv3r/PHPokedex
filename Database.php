@@ -21,8 +21,8 @@
     public function OBTENER_REGISTROS($query){
         return ($this->conexion->query($query));
     }
-    public function CONVERTIR_QUERY_PARA_RECORRER($tabla){
-        $datos = $this->OBTENER_REGISTROS($tabla);
+    public function CONVERTIR_QUERY_PARA_RECORRER($query){
+        $datos = $this->OBTENER_REGISTROS($query);
         $registros = [];
 
         while ($fila = $datos->fetch_assoc()) {

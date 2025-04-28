@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Registrarse</title>
+    <title>Iniciar Sesion</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <link href="imagenes/Pokeball.png" rel="website icon" type="png">
     <style>
@@ -26,16 +26,13 @@
 </head>
 
 <body class="container">
-
-<form class="form p-4 rounded shadow-sm bg-white d-flex flex-column align-items-center" method="post" action="./procesar-registro.php">
-    <h3 class="title text-center mb-4">Registrarse</h3>
-    <input class="form-control mb-3" name="usuario" placeholder="Nombre de usuario" type="text">
-    <input class="form-control mb-3" name="password" placeholder="Contraseña" type="password">
-    <input class="form-control mb-3" name="confirmarPassword" placeholder="Confirmar contraseña" type="password">
-    <p class="text-center small">¿Ya tenes cuenta? <a href="login.php">Iniciar Sesion</a></p>
-    <input class="btn btn-primary button-confirm" type="submit" value="Registrarse">
-</form>
-
+    <form class="form p-4 rounded shadow-sm bg-white d-flex flex-column align-items-center" method="post" action="./index.php">
+        <h3 class="title text-center mb-4">Iniciar Sesion</h3>
+        <input class="form-control mb-3" name="usuario" placeholder="Nombre de usuario" type="text">
+        <input class="form-control mb-3" name="password" placeholder="Contraseña" type="password">
+        <p class="text-center small">No tenes cuenta? <a href="vista-registrarse.php">Registrarse</a></p>
+        <input class="btn btn-primary button-confirm" type="submit" value="Iniciar Sesion">
+    </form>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 </body>
 </html>
