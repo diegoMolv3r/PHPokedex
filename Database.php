@@ -16,7 +16,7 @@
         $this->conexion->close();
     }
     public function REGISTRAR_USUARIO_EN_LA_BD($username, $password){
-        $this->conexion->query("INSERT INTO usuarios(username, password) VALUES ('$username', '$password')");
+        $this->conexion->query("INSERT INTO usuarios(usuario,contrasenia) VALUES ('$username', '$password')");
     }
     public function OBTENER_REGISTROS($query){
         return ($this->conexion->query($query));

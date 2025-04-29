@@ -15,6 +15,17 @@ class Validador{
         if($this->database->BOOLEAN_BUSCAR_USUARIO_POR('usuarios', 'usuario', $usuario)){
             return "El usuario ya existe";
         }
+
         return true;
     }
+
+    public function validarAdministrador($usuario, $password, $administradores){
+        $esAdministrador = false;
+        foreach ($administradores as $administrador) {
+            $esAdministrador = ($usuario == $administrador["usuario"] && $password == $administrador["contrasenia"]);
+        }
+        return $esAdministrador;
+    }
+
+
 }

@@ -1,9 +1,10 @@
 <?php
 require_once("./Database.php"); $database = new Database();
+require_once("./encabezado.php");
 
 $id = isset($_GET['id']) ? $_GET['id'] : null;
 
-$pokemon = $database->CONVERTIR_QUERY_PARA_RECORRER("SELECT * FROM pokemones WHERE id=$id");
+$pokemon = $database->CONVERTIR_QUERY_PARA_RECORRER("SELECT * FROM pokemon WHERE id=$id");
 $pokemon = $pokemon[0];
 
 ?>
@@ -28,9 +29,9 @@ $pokemon = $pokemon[0];
     </style>
 </head>
 
-<body class="d-flex flex-column justify-content-center align-items-center vh-100">
-
-    <div class=" d-flex flex-column p-3 justify-content-center align-items-start bg-white rounded" style="width: 25rem;">
+<body class="d-flex flex-column justify-content-start align-items-center vh-100">
+    <?php showNavbar(); ?>
+    <div class=" d-flex flex-column p-3 justify-content-center align-items-start bg-white rounded m-auto" style="width: 25rem;">
 
         <h5 class="card-subtitle my-2 text-left w-100">ID: <?=$pokemon['numero_identificador']?></h5>
         <img src="<?= $pokemon['imagen']?>" height="150px" width="150px">
@@ -45,9 +46,10 @@ $pokemon = $pokemon[0];
             <p class="card-text p-2" style="overflow-wrap: break-word;"><?= $pokemon['descripcion'] ?></p>
         </div>
 
+        <a href='index.php' class='btn btn-primary mt-3'>VOLVER A LA POKEDEX</a>
     </div>
 
-    <a href='index.php' class='btn btn-primary mt-3'>VOLVER A LA POKEDEX</a>
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>

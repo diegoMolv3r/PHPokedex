@@ -1,10 +1,16 @@
 <?php
+session_start();
 require_once("./Database.php"); $database = new Database();
 require_once("Validador.php"); $validador = new Validador();
 
-if($validador->ValidarUsuario($_POST["usuario"], $_POST["password"], $_POST["confirmarPassword"])){
+$valido = $validador->ValidarUsuario($_POST["usuario"], $_POST["password"], $_POST["confirmarPassword"]);
+
+if($valido === true){
     $database->REGISTRAR_USUARIO_EN_LA_BD($_POST["usuario"], $_POST["password"]);
-    echo "Usuario registrado";
+    header("location: vista-login.php");
+    $_SESSION["error_registro"] = $valido;
 } else {
-    echo $validador->ValidarUsuario($_POST["usuario"], $_POST["password"], $_POST["confirmarPassword"]);
+    $_SESSION["error_registro"] = $valido;
+    header("location: vista-registrarse.php");
+    exit();
 }

@@ -1,37 +1,16 @@
 <?php
 require_once("./Database.php"); $database = new Database();
+require_once("./usuario_pokemon.php"); $pokedex = new usuariopokemon();
+require_once("./encabezado.php");
 
-function mostrarPokemones($array){
-    foreach ($array as $pokemon){
-        $nombre = $pokemon['nombre'];
-        $tipo1 = $pokemon['tipo1'];
-        $tipo2 = $pokemon['tipo2'];
-        $rutaImagen = $pokemon['imagen'];
-        $id = $pokemon['numero_identificador'];
+$sessionStarted = isset($_SESSION['usuario']);
 
-        echo "<div class='carta p-2'  style=' height: auto; width: auto'>";
-        echo    "<div class='imagen-nombre'>";
-        echo        "<img src='$rutaImagen' alt='$nombre'>";
-        echo        "<h5> " . $nombre . "</h5>";
-        echo    "</div>";
-        if($tipo2 == NULL){
-            echo    "<div class='tipos'>";
-            echo         "<img alt='Foto de $nombre' src='imagenes/Tipos/Tipo_".$tipo1."_EP.png'>";
-        }else{
-            echo    "<div class='tipos'>";
-            echo         "<img alt='Foto de $nombre' src='imagenes/Tipos/Tipo_".$tipo1."_EP.png'>";
-            echo         "<img alt='Foto de $nombre' src='imagenes/Tipos/Tipo_".$tipo2."_EP.png'>";
-        }
-            echo    "</div>";
-
-            echo    "<div>";
-            echo        "<a href='vista-pokemon.php?id=$id' class='link-info mt-3'>VER</a>";
-            echo        "<a href='#' class='link-info mt-3 mx-1'>MODIFICAR</a>";
-            echo        "<a href='#' class='link-info mt-3'>BORRAR</a>";
-            echo    "</div>";
-        echo "</div>";
-    }
+if($sessionStarted){
+    $id_usuario = $_SESSION['id_usuario'];
+    $queryMostrarPokemonesDelUsuario = "SELECT * FROM pokemon p JOIN usuario_pokemon up ON p.id = up.id_pokemon WHERE up.id_usuario = $id_usuario";
+    $pokemonesDelUsuario = $database->CONVERTIR_QUERY_PARA_RECORRER($queryMostrarPokemonesDelUsuario);
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -102,35 +81,38 @@ function mostrarPokemones($array){
 </head>
 <body class="d-flex align-items-center flex-column vh-100">
 
+<?php showNavbar();?>
+
 <h1 class="h1 my-2 text-center">¡Tenemos que atraparlos a todos!</h1>
 <main class="container">
-        <form class="d-flex" role="search" method="post" action="index.php">
-            <input class="form-control me-2" name="filtro" type="search" placeholder="Ingrese el codigo, nombre o tipo de un pokemon" aria-label="Search">
-            <input class="btn btn-success" type="submit" value="Buscar">
-        </form>
-
         <?php
         $filtro = isset($_POST["filtro"]) ? $_POST["filtro"] : "";
-
-        $pokemonesFiltrados = $database->CONVERTIR_QUERY_PARA_RECORRER("SELECT * FROM pokemones WHERE numero_identificador = '".$filtro."' OR nombre LIKE '%".$filtro."%' OR tipo1 LIKE '%".$filtro."%' OR tipo2 LIKE '%".$filtro."%'");
-        $todosLosPokemones = $database->CONVERTIR_QUERY_PARA_RECORRER("SELECT * FROM pokemones");
-
-        if(isset($_POST["filtro"])){
-            if($_POST["filtro"] != "" && empty($pokemonesFiltrados))
-                echo "<h3>Pokemon no encontrado :(</h3>";
-        }
-
+        $pokemonesFiltrados = $database->CONVERTIR_QUERY_PARA_RECORRER("SELECT * FROM pokemon WHERE numero_identificador = '".$filtro."' OR nombre LIKE '%".$filtro."%' OR tipo1 LIKE '%".$filtro."%' OR tipo2 LIKE '%".$filtro."%'");
+        $todosLosPokemones = $database->CONVERTIR_QUERY_PARA_RECORRER("SELECT * FROM pokemon");
+        if(isset($_POST["filtro"])){if($_POST["filtro"] != "" && empty($pokemonesFiltrados))echo "<h3>Pokemon no encontrado :(</h3>";}
         ?>
 
+        <h2>
+            <?php if($sessionStarted){echo "Usuario: " . $_SESSION['usuario'] . " " . "ID:  " . $_SESSION['id_usuario'];} ?>
+        </h2>
+
         <section class="row justify-content-center row-cols-1 row-cols-md-3 row-cols-lg-5">
-            <?php ($filtro == "" || empty($pokemonesFiltrados)) ? mostrarPokemones($todosLosPokemones) : mostrarPokemones($pokemonesFiltrados);?>
+            <?php if($sessionStarted){
+                $pokedex->mostrarPokemones($pokemonesDelUsuario, $sessionStarted);
+            }else{
+                ($filtro == "" || empty($pokemonesFiltrados)) ? $pokedex->mostrarPokemones($todosLosPokemones, $sessionStarted) : $pokedex->mostrarPokemones($pokemonesFiltrados,$sessionStarted);
+            }
+            ?>
         </section>
 
         <audio autoplay loop id="musica-menu">
-                <source src="./imagenes/Pokemon Ruby_Sapphire_Emerald- Littleroot Town.mp3">
+            <source src="./imagenes/Pokemon Ruby_Sapphire_Emerald- Littleroot Town.mp3">
         </audio>
+
+
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 </body>
 </html>
+

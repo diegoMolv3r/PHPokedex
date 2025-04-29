@@ -1,4 +1,5 @@
-<?php require_once("./Database.php"); $database = new Database(); ?>
+<?php require_once("./Database.php"); $database = new Database();
+?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -26,7 +27,7 @@
 </head>
 
 <body class="container">
-    <form class="form p-4 rounded shadow-sm bg-white d-flex flex-column align-items-center" method="post" action="./index.php">
+    <form class="form p-4 rounded shadow-sm bg-white d-flex flex-column align-items-center" method="post" action="./procesar-login.php">
         <h3 class="title text-center mb-4">Iniciar Sesion</h3>
         <input class="form-control mb-3" name="usuario" placeholder="Nombre de usuario" type="text">
         <input class="form-control mb-3" name="password" placeholder="Contraseña" type="password">
