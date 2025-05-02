@@ -12,7 +12,7 @@ class usuariopokemon{
             $tipo1 = $pokemon['tipo1'];
             $tipo2 = $pokemon['tipo2'];
             $rutaImagen = $pokemon['imagen'];
-            $id = $pokemon['numero_identificador'];
+            $numero_identificador = $pokemon['numero_identificador'];
 
             echo "<div class='carta p-2'  style=' height: auto; min-width: 12rem'>";
             echo    "<div class='imagen-nombre'>";
@@ -21,19 +21,19 @@ class usuariopokemon{
             echo    "</div>";
             if($tipo2 == NULL){
                 echo    "<div class='tipos'>";
-                echo         "<img alt='Foto de $nombre' src='imagenes/Tipos/Tipo_".$tipo1."_EP.png'>";
+                echo         "<img alt='$tipo1' src='imagenes/Tipos/Tipo_".$tipo1."_EP.png'>";
             }else{
                 echo    "<div class='tipos'>";
-                echo         "<img alt='Foto de $nombre' src='imagenes/Tipos/Tipo_".$tipo1."_EP.png'>";
-                echo         "<img alt='Foto de $nombre' src='imagenes/Tipos/Tipo_".$tipo2."_EP.png'>";
+                echo         "<img alt='$tipo1' src='imagenes/Tipos/Tipo_".$tipo1."_EP.png'>";
+                echo         "<img alt='$tipo2' src='imagenes/Tipos/Tipo_".$tipo2."_EP.png'>";
             }
             echo    "</div>";
 
             echo    "<div>";
-            echo        "<a href='vista-pokemon.php?id=$id' class='link-info mt-3'>VER</a>";
+            echo        "<a href='vista-pokemon.php?numero_identificador=$numero_identificador' class='link-info mt-3'>VER</a>";
             if($sessionStarted){
-                echo    "<a href='vista-modificar-pokemon.php?id=$id' class='link-info mt-3 mx-1'>MODIFICAR</a>";
-                echo    "<a href='borrar.php?id=$id' class='link-info mt-3'>BORRAR</a>";
+                echo    "<a href='vista-modificar-pokemon.php?numero_identificador=$numero_identificador' class='link-info mt-3 mx-1'>MODIFICAR</a>";
+                echo    "<a href='borrar.php?numero_identificador=$numero_identificador' class='link-info mt-3'>BORRAR</a>";
             }
             echo    "</div>";
             echo "</div>";

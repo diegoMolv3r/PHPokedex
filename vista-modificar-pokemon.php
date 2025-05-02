@@ -3,7 +3,7 @@ require_once("./Database.php"); $database = new Database();
 require_once("./usuario_pokemon.php"); $pokedex = new usuariopokemon();
 require_once("./encabezado.php");
 
-$numero_identificador = $_GET["id"];
+$numero_identificador = $_GET["numero_identificador"];
 $pokemon = $database->query("SELECT * FROM pokemones_propios WHERE numero_identificador = $numero_identificador")->fetch_assoc();
 
 $imagen = $pokemon["imagen"];
@@ -90,7 +90,7 @@ $descripcion = $pokemon["descripcion"];
         <form action="modificar.php" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="id-pokemon" class="form-label">ID</label>
-                <input type="text" class="form-control" value="<?=$numero_identificador?>" name="id" id="id-pokemon">
+                <input type="text" class="form-control" value="<?=$numero_identificador?>" name="numero_identificador" id="id-pokemon" readonly>
             </div>
 
             <div class="mb-3">
@@ -100,12 +100,12 @@ $descripcion = $pokemon["descripcion"];
             <div class="mb-3">
                 <label for="tipo1" class="form-label">Tipo 1</label>
                 <select class="form-select" name="tipo1" id="tipo1">
-                    <option value=""><?=strtoupper($tipo1)?></option>
+                    <option value="<?=$tipo1?>"><?=strtoupper($tipo1)?></option>
                     <option value="acero">Acero</option>
                     <option value="agua">Agua</option>
                     <option value="bicho">Bicho</option>
-                    <option value="dragon">Dragon</option>
-                    <option value="electrico">Electrico</option>
+                    <option value="dragón">Dragon</option>
+                    <option value="eléctrico">Eléctrico</option>
                     <option value="fantasma">Fantasma</option>
                     <option value="fuego">Fuego</option>
                     <option value="hada">Hada</option>
@@ -113,7 +113,7 @@ $descripcion = $pokemon["descripcion"];
                     <option value="lucha">Lucha</option>
                     <option value="normal">Normal</option>
                     <option value="planta">Planta</option>
-                    <option value="psiquico">Psíquico</option>
+                    <option value="psíquico">Psíquico</option>
                     <option value="roca">Roca</option>
                     <option value="siniestro">Siniestro</option>
                     <option value="tierra">Tierra</option>
@@ -125,12 +125,12 @@ $descripcion = $pokemon["descripcion"];
             <div class="mb-3">
                 <label for="tipo2" class="form-label">Tipo 2 (opcional)</label>
                 <select class="form-select" name="tipo2" id="tipo2">
-                    <option value=""><?=strtoupper($tipo2)?></option>
+                    <option value="<?=$tipo2?>"><?=strtoupper($tipo2)?></option>
                     <option value="acero">Acero</option>
                     <option value="agua">Agua</option>
                     <option value="bicho">Bicho</option>
-                    <option value="dragon">Dragon</option>
-                    <option value="electrico">Electrico</option>
+                    <option value="dragón">Dragon</option>
+                    <option value="eléctrico">Eléctrico</option>
                     <option value="fantasma">Fantasma</option>
                     <option value="fuego">Fuego</option>
                     <option value="hada">Hada</option>
@@ -138,7 +138,7 @@ $descripcion = $pokemon["descripcion"];
                     <option value="lucha">Lucha</option>
                     <option value="normal">Normal</option>
                     <option value="planta">Planta</option>
-                    <option value="psiquico">Psíquico</option>
+                    <option value="psíquico">Psíquico</option>
                     <option value="roca">Roca</option>
                     <option value="siniestro">Siniestro</option>
                     <option value="tierra">Tierra</option>
@@ -155,6 +155,7 @@ $descripcion = $pokemon["descripcion"];
             <div class="mb-3">
                 <label for="imgaen" class="form-label">Imagen</label>
                 <input type="file" class="form-control" name="imagen" id="imagen">
+                <input type="hidden" name="imagen_vieja" value="<?= $imagen ?>">
             </div>
 
             <input type="submit" class="btn btn-primary" value="Modificar Pokemon">

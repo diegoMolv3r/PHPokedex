@@ -2,9 +2,14 @@
 require_once("./Database.php"); $database = new Database();
 require_once("./encabezado.php");
 
-$id = isset($_GET['id']) ? $_GET['id'] : null;
+$numero_identificador = isset($_GET['numero_identificador']) ? $_GET['numero_identificador'] : null;
 
-$pokemon = $database->CONVERTIR_QUERY_PARA_RECORRER("SELECT * FROM pokemones_propios WHERE numero_identificador=$id");
+if(isset($_SESSION['id_usuario'])){
+    $pokemon = $database->CONVERTIR_QUERY_PARA_RECORRER("SELECT * FROM pokemones_propios WHERE numero_identificador= '$numero_identificador'");
+}else{
+    $pokemon = $database->CONVERTIR_QUERY_PARA_RECORRER("SELECT * FROM pokemon WHERE numero_identificador= '$numero_identificador'");
+}
+
 $pokemon = $pokemon[0];
 
 ?>
@@ -32,9 +37,8 @@ $pokemon = $pokemon[0];
 <body class="d-flex flex-column justify-content-start align-items-center vh-100">
     <?php showNavbar(); ?>
     <div class=" d-flex flex-column p-3 justify-content-center align-items-start bg-white rounded m-auto" style="width: 25rem;">
-
         <h5 class="card-subtitle my-2 text-left w-100">ID: <?=$pokemon['numero_identificador']?></h5>
-        <img src="<?= $pokemon['imagen']?>" height="150px" width="150px">
+        <img src="<?=$pokemon['imagen']?>"height="150px" width="150px">
 
         <div class="d-flex justify-content-start">
             <img <?= "src='imagenes/Tipos/Tipo_" . $pokemon['tipo1'] . "_EP.png' style='margin-right: 15px;'>" ?>

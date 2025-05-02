@@ -19,7 +19,7 @@ function obtenerImagen(){
 
             $extension = pathinfo($nombre, PATHINFO_EXTENSION);
 
-            $nuevoNombre = $_SESSION['id_usuario'] . "_" . obtenerIdPokemon() . obtenerNombre() . "." . $extension;
+            $nuevoNombre = $_SESSION['id_usuario'] . "_" . obtenerIdPokemon() . "." . $extension;
 
             $direccionDeGuardado = $carpeta . $nuevoNombre;
 

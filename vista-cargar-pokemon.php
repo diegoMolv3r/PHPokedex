@@ -98,8 +98,8 @@ require_once("./encabezado.php");
                     <option value="acero">Acero</option>
                     <option value="agua">Agua</option>
                     <option value="bicho">Bicho</option>
-                    <option value="dragon">Dragon</option>
-                    <option value="electrico">Electrico</option>
+                    <option value="dragón">Dragon</option>
+                    <option value="eléctrico">Electrico</option>
                     <option value="fantasma">Fantasma</option>
                     <option value="fuego">Fuego</option>
                     <option value="hada">Hada</option>
@@ -107,7 +107,7 @@ require_once("./encabezado.php");
                     <option value="lucha">Lucha</option>
                     <option value="normal">Normal</option>
                     <option value="planta">Planta</option>
-                    <option value="psiquico">Psíquico</option>
+                    <option value="psíquico">Psíquico</option>
                     <option value="roca">Roca</option>
                     <option value="siniestro">Siniestro</option>
                     <option value="tierra">Tierra</option>
@@ -123,8 +123,8 @@ require_once("./encabezado.php");
                     <option value="acero">Acero</option>
                     <option value="agua">Agua</option>
                     <option value="bicho">Bicho</option>
-                    <option value="dragon">Dragon</option>
-                    <option value="electrico">Electrico</option>
+                    <option value="dragón">Dragon</option>
+                    <option value="eléctrico">Electrico</option>
                     <option value="fantasma">Fantasma</option>
                     <option value="fuego">Fuego</option>
                     <option value="hada">Hada</option>
@@ -132,7 +132,7 @@ require_once("./encabezado.php");
                     <option value="lucha">Lucha</option>
                     <option value="normal">Normal</option>
                     <option value="planta">Planta</option>
-                    <option value="psiquico">Psíquico</option>
+                    <option value="psíquico">Psíquico</option>
                     <option value="roca">Roca</option>
                     <option value="siniestro">Siniestro</option>
                     <option value="tierra">Tierra</option>
