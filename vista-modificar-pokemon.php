@@ -1,6 +1,17 @@
 <?php
 require_once("./Database.php"); $database = new Database();
+require_once("./usuario_pokemon.php"); $pokedex = new usuariopokemon();
 require_once("./encabezado.php");
+
+$numero_identificador = $_GET["id"];
+$pokemon = $database->query("SELECT * FROM pokemones_propios WHERE numero_identificador = $numero_identificador")->fetch_assoc();
+
+$imagen = $pokemon["imagen"];
+$nombrePokemon = $pokemon["nombre"];
+$tipo1 = $pokemon["tipo1"];
+$tipo2 = $pokemon["tipo2"];
+$descripcion = $pokemon["descripcion"];
+
 ?>
 
 <!DOCTYPE html>
@@ -76,25 +87,20 @@ require_once("./encabezado.php");
 <div class="containter mt-5">
     <div class="card shadow p-4">
         <h4 class="mb-4">Cargar un nuevo Pokemon</h4>
-        <form action="cargar-pokemon.php" method="post" enctype="multipart/form-data">
-            <div class="mb-3">
-                <label for="imgaen" class="form-label">Imagen</label>
-                <input type="file" class="form-control" name="imagen" id="imagen">
-            </div>
-
+        <form action="modificar.php" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="id-pokemon" class="form-label">ID</label>
-                <input type="text" class="form-control" placeholder="Ingrese el ID del pokemon" name="id" id="id-pokemon">
+                <input type="text" class="form-control" value="<?=$numero_identificador?>" name="id" id="id-pokemon">
             </div>
 
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" placeholder="Ingrese el nombre del pokemon" name="nombre" id="nombre" required>
+                <input type="text" class="form-control" value="<?=$nombrePokemon?>" name="nombre" id="nombre">
             </div>
             <div class="mb-3">
                 <label for="tipo1" class="form-label">Tipo 1</label>
-                <select class="form-select" name="tipo1" id="tipo1" required>
-                    <option value="">Seleccione un tipo</option>
+                <select class="form-select" name="tipo1" id="tipo1">
+                    <option value=""><?=strtoupper($tipo1)?></option>
                     <option value="acero">Acero</option>
                     <option value="agua">Agua</option>
                     <option value="bicho">Bicho</option>
@@ -119,7 +125,7 @@ require_once("./encabezado.php");
             <div class="mb-3">
                 <label for="tipo2" class="form-label">Tipo 2 (opcional)</label>
                 <select class="form-select" name="tipo2" id="tipo2">
-                    <option value="">Seleccione un tipo</option>
+                    <option value=""><?=strtoupper($tipo2)?></option>
                     <option value="acero">Acero</option>
                     <option value="agua">Agua</option>
                     <option value="bicho">Bicho</option>
@@ -143,9 +149,15 @@ require_once("./encabezado.php");
 
             <div class="mb-3">
                 <label for="descripcion" class="form-label">Descripcion</label>
-                <textarea class="form-control" name="descripcion" id="descripcion" rows="3" placeholder="Escriba una descripcion del Pokemon..."></textarea>
+                <textarea class="form-control" name="descripcion" id="descripcion" rows="3"><?=$descripcion?></textarea>
             </div>
-            <input type="submit" class="btn btn-primary" value="Cargar Pokemon">
+
+            <div class="mb-3">
+                <label for="imgaen" class="form-label">Imagen</label>
+                <input type="file" class="form-control" name="imagen" id="imagen">
+            </div>
+
+            <input type="submit" class="btn btn-primary" value="Modificar Pokemon">
         </form>
     </div>
 </div>

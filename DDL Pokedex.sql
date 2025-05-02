@@ -3,21 +3,35 @@ CREATE DATABASE pokedex;
 USE pokedex;
 
 CREATE TABLE pokemones (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        numero_identificador INT NOT NULL,
-        imagen VARCHAR(255),
-        nombre VARCHAR(100),
-        tipo1 VARCHAR(50) NOT NULL,
-        tipo2 VARCHAR(50),
-        descripcion VARCHAR(700)
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    numero_identificador INT NOT NULL,
+    imagen VARCHAR(255),
+    nombre VARCHAR(100),
+    tipo1 VARCHAR(50) NOT NULL,
+    tipo2 VARCHAR(50),
+    descripcion VARCHAR(700)
 );
 
-CREATE TABLE usuarios(
+CREATE TABLE usuario(
     id INT AUTO_INCREMENT PRIMARY KEY,
     usuario VARCHAR(30) NOT NULL UNIQUE,
     contrasenia VARCHAR(25) NOT NULL,
     es_admin BOOLEAN NOT NULL DEFAULT FALSE
 );
+
+CREATE TABLE pokemones_propios(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    numero_identificador INT NOT NULL,
+    imagen VARCHAR(255),
+    nombre VARCHAR(100),
+    tipo1 VARCHAR(50) NOT NULL,
+    tipo2 VARCHAR(50),
+    descripcion VARCHAR(700),
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id)
+);
+
+DROP TABLE pokemones_propios;
 
 INSERT INTO pokemones (numero_identificador, imagen, nombre, tipo1, tipo2, descripcion) VALUES
 (1, 'imagenes/pokemones/1.png', 'Bulbasaur', 'Planta', 'Veneno','Bulbasaur nace con una semilla en el lomo que crece con el tiempo.\nEs conocido por su naturaleza tranquila y su fuerte vínculo con la vegetación.'),

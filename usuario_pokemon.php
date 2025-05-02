@@ -16,7 +16,7 @@ class usuariopokemon{
 
             echo "<div class='carta p-2'  style=' height: auto; min-width: 12rem'>";
             echo    "<div class='imagen-nombre'>";
-            echo        "<img src='$rutaImagen' alt='$nombre'>";
+            echo        "<img src='$rutaImagen' alt='$nombre' style='width: 48px; height: 48px'>";
             echo        "<h5> " . $nombre . "</h5>";
             echo    "</div>";
             if($tipo2 == NULL){
@@ -32,7 +32,7 @@ class usuariopokemon{
             echo    "<div>";
             echo        "<a href='vista-pokemon.php?id=$id' class='link-info mt-3'>VER</a>";
             if($sessionStarted){
-                echo    "<a href='#' class='link-info mt-3 mx-1'>MODIFICAR</a>";
+                echo    "<a href='vista-modificar-pokemon.php?id=$id' class='link-info mt-3 mx-1'>MODIFICAR</a>";
                 echo    "<a href='borrar.php?id=$id' class='link-info mt-3'>BORRAR</a>";
             }
             echo    "</div>";

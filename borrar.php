@@ -7,7 +7,7 @@ $id = $_GET['id'];
 $id_usuario = $_SESSION['id_usuario'];
 
 if(isset($_SESSION['usuario']) && isset($_SESSION['id_usuario']) && isset($id)){
-    $database->query("DELETE FROM usuario_pokemon WHERE id_usuario = '$id_usuario' AND id_pokemon = '$id';");
+    $database->query("DELETE FROM pokemones_propios WHERE numero_identificador = '$id';");
 }
 
 header("location: index.php");

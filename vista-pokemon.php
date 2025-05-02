@@ -4,7 +4,7 @@ require_once("./encabezado.php");
 
 $id = isset($_GET['id']) ? $_GET['id'] : null;
 
-$pokemon = $database->CONVERTIR_QUERY_PARA_RECORRER("SELECT * FROM pokemon WHERE id=$id");
+$pokemon = $database->CONVERTIR_QUERY_PARA_RECORRER("SELECT * FROM pokemones_propios WHERE numero_identificador=$id");
 $pokemon = $pokemon[0];
 
 ?>
