@@ -1,7 +1,7 @@
 <?php
-require_once("./Database.php"); $database = new Database();
-require_once("./usuario_pokemon.php"); $pokedex = new usuariopokemon();
-require_once("./encabezado.php");
+require_once("Database.php"); $database = new Database();
+require_once("usuario_pokemon.php"); $pokedex = new usuariopokemon();
+require_once("encabezado.php");
 
 $sessionStarted = isset($_SESSION['usuario']);
 
@@ -10,7 +10,6 @@ if($sessionStarted){
     $queryMostrarPokemonesDelUsuario = "SELECT * FROM pokemones_propios WHERE id_usuario = $id_usuario";
     $pokemonesDelUsuario = $database->CONVERTIR_QUERY_PARA_RECORRER($queryMostrarPokemonesDelUsuario);
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -87,29 +86,38 @@ if($sessionStarted){
 
 <h1 class="h1 my-2 text-center">¡Tenemos que atraparlos a todos!</h1>
 <main class="container">
-        <?php
-        $filtro = isset($_POST["filtro"]) ? $_POST["filtro"] : "";
+    <?php
+    $filtro = isset($_POST["filtro"]) ? $_POST["filtro"] : "";
+
+    if($sessionStarted){
+        $pokemonesFiltrados = $database->CONVERTIR_QUERY_PARA_RECORRER("SELECT * FROM pokemones_propios WHERE id_usuario = '".$id_usuario."' AND (numero_identificador = '".$filtro."' OR nombre LIKE '%".$filtro."%' OR tipo1 LIKE '%".$filtro."%' OR tipo2 LIKE '%".$filtro."%')");
+        $todosLosPokemones = $database->CONVERTIR_QUERY_PARA_RECORRER("SELECT * FROM pokemones_propios WHERE id_usuario = '".$id_usuario."'");
+    }else{
         $pokemonesFiltrados = $database->CONVERTIR_QUERY_PARA_RECORRER("SELECT * FROM pokemon WHERE numero_identificador = '".$filtro."' OR nombre LIKE '%".$filtro."%' OR tipo1 LIKE '%".$filtro."%' OR tipo2 LIKE '%".$filtro."%'");
         $todosLosPokemones = $database->CONVERTIR_QUERY_PARA_RECORRER("SELECT * FROM pokemon");
-        if(isset($_POST["filtro"])){if($_POST["filtro"] != "" && empty($pokemonesFiltrados))echo "<h3>Pokemon no encontrado :(</h3>";}
-        ?>
+    }
+    ?>
 
-        <h2>
-            <?php if($sessionStarted){echo "Usuario: " . $_SESSION['usuario'] . " " . "ID:  " . $_SESSION['id_usuario'];} ?>
-        </h2>
+
+    <h3><?php if(!empty($_POST["filtro"]) && empty($pokemonesFiltrados)){echo "Pokemon no encontrado :(";} ?></h3>
+    <h2><?php if($sessionStarted){echo "Usuario: " . $_SESSION['usuario'] . " " . "ID:  " . $_SESSION['id_usuario'];} ?></h2>
 
         <section class="row justify-content-center row-cols-1 row-cols-md-3 row-cols-lg-5">
             <?php if($sessionStarted){
-                $pokedex->mostrarPokemones($pokemonesDelUsuario, $sessionStarted);
+                if(empty($filtro)){
+                    $pokedex->mostrarPokemones($pokemonesDelUsuario, $sessionStarted);
+                }else{
+                    $pokedex->mostrarPokemones($pokemonesFiltrados, $sessionStarted);
+                }
             }else{
-                ($filtro == "" || empty($pokemonesFiltrados)) ? $pokedex->mostrarPokemones($todosLosPokemones, $sessionStarted) : $pokedex->mostrarPokemones($pokemonesFiltrados,$sessionStarted);
+                if(empty($filtro)){
+                    $pokedex->mostrarPokemones($todosLosPokemones, $sessionStarted);
+                }else{
+                    $pokedex->mostrarPokemones($pokemonesFiltrados, $sessionStarted);
+                }
             }
             ?>
         </section>
-
-        <audio autoplay loop id="musica-menu">
-            <source src="./imagenes/Pokemon Ruby_Sapphire_Emerald- Littleroot Town.mp3">
-        </audio>
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>

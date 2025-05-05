@@ -27,5 +27,9 @@ class Validador{
         return $esAdministrador;
     }
 
+    public function buscarUsuario($usuario, $password){
+
+    }
+
 
 }

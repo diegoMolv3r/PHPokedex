@@ -29,8 +29,8 @@
 <body class="container">
     <form class="form p-4 rounded shadow-sm bg-white d-flex flex-column align-items-center" method="post" action="./procesar-login.php">
         <h3 class="title text-center mb-4">Iniciar Sesion</h3>
-        <input class="form-control mb-3" name="usuario" placeholder="Nombre de usuario" type="text">
-        <input class="form-control mb-3" name="password" placeholder="Contraseña" type="password">
+        <input class="form-control mb-3" name="usuario" placeholder="Nombre de usuario" type="text" required>
+        <input class="form-control mb-3" name="password" placeholder="Contraseña" type="password" required>
         <p class="text-center small">No tenes cuenta? <a href="vista-registrarse.php">Registrarse</a></p>
         <input class="btn btn-primary button-confirm" type="submit" value="Iniciar Sesion">
     </form>

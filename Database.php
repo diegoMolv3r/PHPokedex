@@ -12,9 +12,6 @@
     public function query($query){
         return $this->conexion->query($query);
     }
-    public function close(){
-        $this->conexion->close();
-    }
     public function REGISTRAR_USUARIO_EN_LA_BD($username, $password){
         $this->conexion->query("INSERT INTO usuarios(usuario,contrasenia) VALUES ('$username', '$password')");
     }
@@ -30,9 +27,6 @@
         }
 
         return $registros;
-    }
-    public function BUSCAR_USUARIO_POR($tabla, $atributo, $valor){
-        return ($this->conexion->query("SELECT * FROM $tabla WHERE $atributo = '$valor'"));
     }
     public function BOOLEAN_BUSCAR_USUARIO_POR($tabla, $atributo, $valor){
         return ($this->conexion->query("SELECT * FROM $tabla WHERE $atributo = '$valor'")->num_rows > 0);

@@ -11,23 +11,19 @@ $pass = $_POST["password"];
 $id = $database->query("SELECT id FROM usuario WHERE usuario = '$username';")->fetch_assoc();
 $id_usuario = $id['id'];
 
-
 $_SESSION['usuario'] = $username;
 $_SESSION['id_usuario'] = $id_usuario;
 
 if(isset($_SESSION['usuario']) && isset($_SESSION['id_usuario'])){
-    $_SESSION['sessionStarted'] = true;
-
+    $usuarioExistente = $database->query("SELECT * FROM usuario WHERE usuario = '$username' AND contrasenia = '$pass';")->num_rows > 0;
 }
 
-header("location: index.php");
-exit();
+if(isset($usuarioExistente) && $usuarioExistente){
+    header("location: index.php");
+    $_SESSION['sessionStarted'] = true;
 
-//$administradores = $database->CONVERTIR_QUERY_PARA_RECORRER("SELECT * FROM usuarios WHERE es_admin = true");
-//$es_admin= $validador->validarAdministrador($username, $pass, $administradores);
-//
-//if($es_admin){
-//    header("location: vista-admin.php");
-//}else{
-//    header("location: index.php");
-//}
+}else{
+    header("location: vista-login.php");
+}
+
+exit();

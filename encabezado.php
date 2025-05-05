@@ -4,7 +4,7 @@ session_start();
 function showNavbar(){
     $sessionStarted = isset($_SESSION['sessionStarted']) && $_SESSION['sessionStarted'];
 
-    echo "<nav class='navbar navbar-expand-lg bg-body-tertiary w-100'>";
+    echo "<nav class='navbar navbar-expand-lg bg-body-tertiary w-100 d-flex justify-content-between'>";
     echo     "<div class='container-fluid'>";
     echo         "<a class='nav-link' href='index.php'><h1 class='navbar-brand mb-0'>POKEDEX</h1></a>";
 
@@ -13,7 +13,7 @@ function showNavbar(){
     echo         "</button>";
 
     echo         "<div class='collapse navbar-collapse' id='navbarContent'>";
-    echo             "<form class='d-flex mx-auto my-2 my-lg-0 w-100' role='search' method='post' action='index.php'>";
+    echo             "<form class='d-flex mx-auto my-2 my-lg-0 w-50' role='search' method='post' action='index.php'>";
     echo                 "<input class='form-control me-2' name='filtro' type='search' placeholder='Ingrese el código, nombre o tipo de un Pokémon' aria-label='Search'>";
     echo                 "<input class='btn btn-success' type='submit' value='Buscar'>";
     echo             "</form>";
