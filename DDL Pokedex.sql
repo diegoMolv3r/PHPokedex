@@ -2,17 +2,17 @@
 CREATE DATABASE pokedex;
 USE pokedex;
 
-CREATE TABLE pokemones (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    numero_identificador INT NOT NULL,
-    imagen VARCHAR(255),
-    nombre VARCHAR(100),
-    tipo1 VARCHAR(50) NOT NULL,
-    tipo2 VARCHAR(50),
-    descripcion VARCHAR(700)
+CREATE TABLE pokemon(
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        numero_identificador INT NOT NULL,
+        imagen VARCHAR(255),
+        nombre VARCHAR(100),
+        tipo1 VARCHAR(50) NOT NULL,
+        tipo2 VARCHAR(50),
+        descripcion VARCHAR(700)
 );
 
-CREATE TABLE usuario(
+CREATE TABLE usuarios(
     id INT AUTO_INCREMENT PRIMARY KEY,
     usuario VARCHAR(30) NOT NULL UNIQUE,
     contrasenia VARCHAR(25) NOT NULL,
@@ -31,9 +31,7 @@ CREATE TABLE pokemones_propios(
     FOREIGN KEY (id_usuario) REFERENCES usuario(id)
 );
 
-DROP TABLE pokemones_propios;
-
-INSERT INTO pokemones (numero_identificador, imagen, nombre, tipo1, tipo2, descripcion) VALUES
+INSERT INTO pokemon (numero_identificador, imagen, nombre, tipo1, tipo2, descripcion) VALUES
 (1, 'imagenes/pokemones/1.png', 'Bulbasaur', 'Planta', 'Veneno','Bulbasaur nace con una semilla en el lomo que crece con el tiempo.\nEs conocido por su naturaleza tranquila y su fuerte vínculo con la vegetación.'),
 (2, 'imagenes/pokemones/2.png', 'Ivysaur', 'Planta', 'Veneno','Ivysaur desarrolla una flor en su lomo que florece con la luz del sol.\nSe vuelve más fuerte cuando pasa tiempo bajo el sol, absorbiendo energía.'),
 (3, 'imagenes/pokemones/3.png', 'Venusaur', 'Planta', 'Veneno','La flor de Venusaur libera un aroma que calma a los Pokémon cercanos.\nEste Pokémon alcanza su máximo poder bajo la luz solar intensa.'),
@@ -62,10 +60,10 @@ INSERT INTO pokemones (numero_identificador, imagen, nombre, tipo1, tipo2, descr
 (26, 'imagenes/pokemones/26.png', 'Raichu', 'Eléctrico', NULL,'Raichu es más rápido y más poderoso que su preevolución.\nEste Pokémon puede generar electricidad de forma más eficiente.'),
 (27, 'imagenes/pokemones/27.png', 'Sandshrew', 'Tierra', NULL,'Sandshrew tiene una piel dura que lo protege de los ataques físicos.\nEste Pokémon excava rápidamente para escapar de sus enemigos.'),
 (28, 'imagenes/pokemones/28.png', 'Sandslash', 'Tierra', NULL,'Sandslash es mucho más grande y fuerte que su preevolución.\nSus garras le permiten excavar a grandes profundidades.'),
-(29, 'imagenes/pokemones/29.png', 'Nidoran♀', 'Veneno', NULL,'Nidoran♀ es un Pokémon pequeño pero valiente, conocido por sus habilidades defensivas.\nSu aguijón es venenoso y lo usa para defenderse.'),
-(30, 'imagenes/pokemones/30.png', 'Nidorina', 'Veneno', NULL,'Nidorina es más grande que Nidoran♀ y tiene una personalidad más protectora.\nAunque no puede evolucionar sin una Piedra Lunar, es muy fuerte.'),
+(29, 'imagenes/pokemones/29.png', 'Nidoran', 'Veneno', NULL,'Nidoran es un Pokémon pequeño pero valiente, conocido por sus habilidades defensivas.\nSu aguijón es venenoso y lo usa para defenderse.'),
+(30, 'imagenes/pokemones/30.png', 'Nidorina', 'Veneno', NULL,'Nidorina es más grande que Nidoran y tiene una personalidad más protectora.\nAunque no puede evolucionar sin una Piedra Lunar, es muy fuerte.'),
 (31, 'imagenes/pokemones/31.png', 'Nidoqueen', 'Veneno', 'Tierra','Nidoqueen es un Pokémon de gran tamaño y fuerza física.\nEs conocido por su capacidad para proteger su territorio con fiereza.'),
-(32, 'imagenes/pokemones/32.png', 'Nidoran♂', 'Veneno', NULL,'Nidoran♂ es un Pokémon pequeño, con una naturaleza curiosa y exploradora.\nSu aguijón en la espalda es peligroso para los Pokémon de su tamaño.'),
+(32, 'imagenes/pokemones/32.png', 'Nidoran', 'Veneno', NULL,'Nidoran es un Pokémon pequeño, con una naturaleza curiosa y exploradora.\nSu aguijón en la espalda es peligroso para los Pokémon de su tamaño.'),
 (33, 'imagenes/pokemones/33.png', 'Nidorino', 'Veneno', NULL,'Nidorino es un Pokémon más agresivo que su preevolución.\nEs muy territorial y se puede poner muy agresivo cuando se siente amenazado.'),
 (34, 'imagenes/pokemones/34.png', 'Nidoking', 'Veneno', 'Tierra','Nidoking es extremadamente fuerte y feroz.\nSu cuerno es su arma principal, y puede atacar con una gran fuerza física y elemental.'),
 (35, 'imagenes/pokemones/35.png', 'Clefairy', 'Hada', NULL,'Clefairy es un Pokémon tímido que prefiere estar en la oscuridad de la noche.\nEs muy protector de sus amigos y tiene poderes místicos.'),
@@ -184,3 +182,7 @@ INSERT INTO pokemones (numero_identificador, imagen, nombre, tipo1, tipo2, descr
 (148, 'imagenes/pokemones/148.png', 'Dragonair', 'Dragón', NULL, 'Dragonair es la evolución de Dratini y tiene una apariencia más majestuosa.\nEste Pokémon tiene un control total sobre las corrientes de aire y puede volar.'),
 (149, 'imagenes/pokemones/149.png', 'Dragonite', 'Dragón', 'Volador', 'Dragonite es la evolución final de Dratini.\nEste Pokémon es muy poderoso y puede viajar a gran velocidad tanto en el aire como en el agua.'),
 (150, 'imagenes/pokemones/150.png', 'Mewtwo', 'Psíquico', NULL, 'Mewtwo es un Pokémon creado artificialmente por científicos.\nEste Pokémon tiene una gran fuerza psíquica y puede controlar la mente de otros Pokémon.');
+
+INSERT INTO usuario(usuario, contrasenia) VALUES 
+('usuario1', '1234'),
+('usuario2', '4321');

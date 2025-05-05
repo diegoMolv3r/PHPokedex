@@ -75,7 +75,6 @@ if($sessionStarted){
         .btn:hover{
             transform: scale(1.2);
         }
-
     </style>
 </head>
 <body class="d-flex align-items-center flex-column vh-100">
@@ -100,8 +99,6 @@ if($sessionStarted){
 
 
     <h3><?php if(!empty($_POST["filtro"]) && empty($pokemonesFiltrados)){echo "Pokemon no encontrado :(";} ?></h3>
-    <h2><?php if($sessionStarted){echo "Usuario: " . $_SESSION['usuario'] . " " . "ID:  " . $_SESSION['id_usuario'];} ?></h2>
-
         <section class="row justify-content-center row-cols-1 row-cols-md-3 row-cols-lg-5">
             <?php if($sessionStarted){
                 if(empty($filtro)){

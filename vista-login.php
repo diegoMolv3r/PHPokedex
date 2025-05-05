@@ -1,5 +1,4 @@
-<?php require_once("./Database.php"); $database = new Database();
-?>
+<?php require_once("./Database.php"); $database = new Database(); ?>
 
 <!DOCTYPE html>
 <html lang="es">

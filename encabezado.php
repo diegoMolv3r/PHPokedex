@@ -6,7 +6,7 @@ function showNavbar(){
 
     echo "<nav class='navbar navbar-expand-lg bg-body-tertiary w-100 d-flex justify-content-between'>";
     echo     "<div class='container-fluid'>";
-    echo         "<a class='nav-link' href='index.php'><h1 class='navbar-brand mb-0'>POKEDEX</h1></a>";
+    echo         "<a class='nav-link' href='index.php'><h1 class='navbar-brand mb-0'><img alt='logotipo pokemon' height='60px' src='imagenes/logotipo.png'></h1></a>";
 
     echo         "<button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarContent' aria-controls='navbarContent' aria-expanded='false' aria-label='Toggle navigation'>";
     echo         "<span class='navbar-toggler-icon'></span>";
@@ -19,11 +19,8 @@ function showNavbar(){
     echo             "</form>";
 
     echo         "<div class='d-flex ms-lg-3 mt-2 mt-lg-0'>";
-//    if(false){
-//        echo "<a class='btn btn-primary me-2' href='vista-registrarse.php'>Registrarse</a>";
-//    }
-
     if($sessionStarted){
+        echo "<p style='margin-right: 20px'>Usuario: " . $_SESSION['usuario'] . " " . "ID:  " . $_SESSION['id_usuario']."</p>";
         echo "<a class='btn btn-outline-danger' href='log-out.php'>Log out</a>";
     }else{
         echo "<a class='btn btn-outline-primary' href='vista-login.php'>Login</a>";
